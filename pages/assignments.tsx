@@ -1,14 +1,36 @@
 // pages/index.tsx
-import React from "react";
+import { ButtonOutline } from "../components/Button";
+import { AssignmentForm } from "../components/FormAssignemnt";
+import React, { useState } from "react";
 
 export default function Home() {
+  // Step 1: State to track whether the form is displayed
+  const [showForm, setShowForm] = useState(false);
+
+  // Step 2: Function to handle button click and show the form
+  const handleCreateAssignment = () => {
+    setShowForm(true); // Update the state to show the form when the button is clicked
+  };
+
   return (
     <>
-      <h1 className="text-4xl font-bold mb-4">Welcome to Grading Assistant</h1>
+      <h1 className="text-4xl font-bold mb-4">Assignments</h1>
       <p className="text-gray-600">
-        test assignments
+        {showForm ? "" : "You don't have any assignments yet"}
       </p>
+      <div className="h-4" />  {/* This is your "extra white line" */}
+      {/* Step 4: Show the button if no assignments yet, otherwise show the form */}
+      {!showForm ? (
+        <>
+          <ButtonOutline buttonname="Create assignment" onClick={handleCreateAssignment} />
+          <div className="h-4" /> {/* This is your "extra white line" */}
+        </>
+      ) : (
+        <AssignmentForm /> // This is where the form will be shown
+      )}
     </>
   );
 }
+
+
 
