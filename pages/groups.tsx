@@ -22,7 +22,7 @@ export default function GroupsPage() {
         <>
           <p className="text-gray-600">You don’t have any groups yet</p>
           <div className="h-4" />
-          <ButtonOutline buttonname="Create Groups" onClick={handleCreateClick} />
+          <ButtonOutline buttonname="Create groups" onClick={handleCreateClick} />
         </>
       ) : (
         <>
@@ -53,30 +53,36 @@ export default function GroupsPage() {
           </div>
 
           {/* Navigation Buttons */}
-          {currentStep > 0 && (
-            <div className="mt-8 flex justify-between">
+          <div className="mt-8 flex justify-between">
+            <NavigationButton
+              label="Back"
+              direction="left"
+              onClick={() => {
+                if (currentStep === 1) {
+                  // Return to initial screen
+                  setCreatingGroups(false);
+                  setCurrentStep(0);
+                } else {
+                  setCurrentStep(currentStep - 1);
+                }
+              }}
+            />
+            {currentStep < 2 ? (
               <NavigationButton
-                label="Back"
-                direction="left"
-                onClick={() => setCurrentStep(currentStep - 1)}
+                label="Next"
+                direction="right"
+                onClick={() => setCurrentStep(currentStep + 1)}
               />
-              {currentStep < 2 ? (
-                <NavigationButton
-                  label="Next"
-                  direction="right"
-                  onClick={() => setCurrentStep(currentStep + 1)}
-                />
-              ) : (
-                <NavigationButton
-                  label="Finish"
-                  direction="right"
-                  onClick={() => {
-                    // Final submission logic here
-                  }}
-                />
-              )}
-            </div>
-          )}
+            ) : (
+              <NavigationButton
+                label="Finish"
+                direction="right"
+                onClick={() => {
+                  // Final submission logic here
+                }}
+              />
+            )}
+          </div>
         </>
       )}
     </div>
