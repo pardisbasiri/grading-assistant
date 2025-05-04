@@ -26,12 +26,12 @@ export function CalendarDemo() {
 
 
 
-export function DateOfBirthField() {
+export function CalenderField() {
   const [date, setDate] = useState<Date | undefined>();
 
   return (
     <div className="flex flex-col space-y-2">
-      <label className="text-sm font-medium">Date of birth</label>
+      <label className="text-sm font-medium">Due date of the assignment:</label>
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -51,15 +51,12 @@ export function DateOfBirthField() {
             selected={date}
             onSelect={setDate}
             disabled={(d) =>
-              d > new Date() || d < new Date("1900-01-01")
+              d < new Date("1900-01-01")
             }
             initialFocus
           />
         </PopoverContent>
       </Popover>
-      <p className="text-sm text-muted-foreground">
-        Your date of birth is used to calculate your age.
-      </p>
     </div>
   );
 }

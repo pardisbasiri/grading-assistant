@@ -1,8 +1,9 @@
 // pages/index.tsx
 import { ButtonOutline } from "../components/Button";
-import { AssignmentForm, FormsAssignment } from "../components/FormAssignemnt";
+import { FormsAssignment } from "../components/FormAssignemnt";
 import React, { useState } from "react";
 import { FormsAssignmentNew } from "../components/FormAssignemntNew";
+import { SliderDemo } from "../components/Slider";
 
 export default function Home() {
   // Step 1: State to track whether the form is displayed
