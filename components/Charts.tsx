@@ -42,6 +42,17 @@ const chart2Data = [
   { day: "28.04", students_inclass: 24 },
 ]
 
+const chart3Data = [
+  { group: "Group 1", message: "Low attendance in April" },
+  { group: "Group 3", message: "Project deadline missed" },
+  { group: "Group 5", message: "Project deadline missed" },
+]
+
+const chart4Data = [
+  { student: "Alice", message: "Absent 3 times this week" },
+  { student: "Bob", message: "Low quiz score average" },
+]
+
 const chartConfig = {
   n_student: {
     label: "Number of students ",
@@ -55,26 +66,28 @@ const chartConfig = {
 
 export function ChartsSideBySide() {
   return (
-    <div className="flex w-full space-x-4">
-      {/* First chart (Left side) */}
-      <div className="w-1/2">
+    <div className="space-y-4">
+      <div className="flex w-full flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
         <ChartWeightedAverage />
-      </div>
-
-      {/* Second chart (Right side) */}
-      <div className="w-1/2">
         <ChartAverageAttendence />
+      </div>
+      <div className="flex w-full flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+        <ChartGroupWarnings />
+        <ChartStudentWarnings />
       </div>
     </div>
   );
 }
 
+
+const commonCardStyles = "w-full md:w-1/2 p-4 text-sm"
+
 export function ChartWeightedAverage() {
   return (
-    <Card className="p-2 text-sm">
+    <Card className={commonCardStyles}>
       <CardHeader className="pb-2">
         <CardTitle className="text-lg">Class grade distribution</CardTitle>
-        <CardDescription>Grade: 1 - 10</CardDescription>
+        <CardDescription className="text-xs text-muted-foreground">Grades 1–10</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -120,21 +133,18 @@ export function ChartWeightedAverage() {
 
 export function ChartAverageAttendence() {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Average attendance over time</CardTitle>
-        <CardDescription>April 2025</CardDescription>
+    <Card className={commonCardStyles}>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-lg">Average attendance over time</CardTitle>
+        <CardDescription className="text-xs text-muted-foreground">April 2025</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
           <LineChart
-            accessibilityLayer
             data={chart2Data}
-            margin={{
-              top: 20,
-              left: 12,
-              right: 12,
-            }}
+            width={320}
+            height={220}
+            margin={{ top: 20, left: 12, right: 12 }}
           >
             <CartesianGrid vertical={false} />
             <XAxis
@@ -156,31 +166,68 @@ export function ChartAverageAttendence() {
               dot={{
                 fill: "var(--color-students_inclass)",
               }}
-              activeDot={{
-                r: 6,
-              }}
+              activeDot={{ r: 6 }}
             >
               <LabelList
                 position="top"
                 offset={12}
                 className="fill-foreground"
-                fontSize={12}
+                fontSize={11}
               />
             </Line>
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+      <CardFooter className="flex-col items-start gap-1 text-xs">
+        <div className="flex gap-1 font-medium leading-none">
+          Trending up by 5.2% this month <TrendingUp className="h-3 w-3" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          Showing total visitors (last 6 months)
         </div>
       </CardFooter>
     </Card>
   );
 }
 
+export function ChartGroupWarnings() {
+  return (
+    <Card className={commonCardStyles}>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-lg">Group Alerts</CardTitle>
+        <CardDescription className="text-xs text-muted-foreground">April 2025</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-2">
+          {chart3Data.map((data) => (
+            <div key={data.group} className="p-3 bg-gray-100 rounded-md">
+              <p className="text-sm font-semibold">{data.group}</p>
+              <p className="text-xs text-muted-foreground">{data.message}</p>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
 
-
+export function ChartStudentWarnings() {
+  return (
+    <Card className={commonCardStyles}>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-lg">Student Alerts</CardTitle>
+        <CardDescription className="text-xs text-muted-foreground">April 2025</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-2">
+          {chart4Data.map((data) => (
+            <div key={data.student} className="p-3 bg-gray-100 rounded-md">
+              <p className="text-sm font-semibold">{data.student}</p>
+              <p className="text-xs text-muted-foreground">{data.message}</p>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
