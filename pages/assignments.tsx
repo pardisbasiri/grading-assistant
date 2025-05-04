@@ -5,6 +5,8 @@ import { FormsAssignment } from "../components/FormAssignemnt";
 import { ButtonOutline } from "../components/Button";
 import NavigationButton from "../components/NavigationButton";
 import { FormsAssignmentNew } from "../components/FormAssignemntNew";
+import { DynamicCriteriaBuilder } from "../components/DynamicCriteriaBuilder copy 2";
+import { StaticOverviewTable } from "../components/StaticOverviewTable";
 
 export default function AssignmentsPage() {
   const [showForm, setShowForm] = useState(false);
@@ -22,7 +24,8 @@ export default function AssignmentsPage() {
       case 0:
         return <FormsAssignmentNew />;
       case 1:
-        return <p className="text-gray-600">Grading criteria step placeholder</p>;
+        return  <DynamicCriteriaBuilder/> 
+        // return <p className="text-gray-600">Grading criteria step placeholder</p>;
       case 2:
         return <p className="text-gray-600">Overview step placeholder</p>;
       default:
