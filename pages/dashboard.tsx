@@ -3,6 +3,7 @@ import React from "react";
 import { AlertDialogDemo } from "../components/Alert";
 import { ComboboxDemo } from "../components/Comobox";
 import { TabsDemo } from "../components/Tabs";
+import { ChartAverageAttendence, ChartWeightedAverage } from "../components/Charts";
 
 export default function Home() {
   return (
@@ -12,11 +13,10 @@ export default function Home() {
         test dashboard
       </p>
       <div className="h-4" />  {/* This is your "extra white line" */}
-        <AlertDialogDemo />
+        <ChartWeightedAverage />
         <div className="h-4" />  {/* This is your "extra white line" */}
-        <ComboboxDemo />
+        <ChartAverageAttendence />
         <div className="h-12" />  {/* This is your "extra white line" */}
-        <TabsDemo />
     </>
   );
 }
