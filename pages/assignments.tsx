@@ -1,38 +1,80 @@
-// pages/index.tsx
-import { ButtonOutline } from "../components/Button";
-import { FormsAssignment } from "../components/FormAssignemnt";
+// pages/assignments.tsx
 import React, { useState } from "react";
-import { FormsAssignmentNew } from "../components/FormAssignemntNew";
-import { SliderDemo } from "../components/Slider";
+import StepProgress from "../components/StepProgress";
+import { FormsAssignment } from "../components/FormAssignemnt";
+import { ButtonOutline } from "../components/Button";
+import NavigationButton from "../components/NavigationButton";
 
-export default function Home() {
-  // Step 1: State to track whether the form is displayed
+export default function AssignmentsPage() {
   const [showForm, setShowForm] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
 
-  // Step 2: Function to handle button click and show the form
+  const steps = ["1. Assignment info", "2. Grading criteria", "3. Overview"];
+
   const handleCreateAssignment = () => {
-    setShowForm(true); // Update the state to show the form when the button is clicked
+    setShowForm(true);
+    setCurrentStep(0);
+  };
+
+  const renderStepContent = () => {
+    switch (currentStep) {
+      case 0:
+        return <FormsAssignment />;
+      case 1:
+        return <p className="text-gray-600">Grading criteria step placeholder</p>;
+      case 2:
+        return <p className="text-gray-600">Overview step placeholder</p>;
+      default:
+        return null;
+    }
   };
 
   return (
-    <>
+    <div className="p-6">
       <h1 className="text-4xl font-bold mb-4">Assignments</h1>
-      <p className="text-gray-600">
-        {showForm ? "" : "You don't have any assignments yet"}
-      </p>
-      <div className="h-4" />  {/* This is your "extra white line" */}
-      {/* Step 4: Show the button if no assignments yet, otherwise show the form */}
+
       {!showForm ? (
         <>
+          <p className="text-gray-600">You don't have any assignments yet</p>
+          <div className="h-4" />
           <ButtonOutline buttonname="Create assignment" onClick={handleCreateAssignment} />
-          <div className="h-4" /> {/* This is your "extra white line" */}
         </>
       ) : (
-        <FormsAssignmentNew /> // This is where the form will be shown
+        <>
+          <StepProgress steps={steps} currentStep={currentStep} />
+          <div className="h-6" />
+          {renderStepContent()}
+
+          {/* Navigation buttons */}
+          <div className="mt-8 flex justify-between">
+            {currentStep > 0 ? (
+              <NavigationButton
+                label="Back"
+                direction="left"
+                onClick={() => setCurrentStep(currentStep - 1)}
+              />
+            ) : (
+              <div /> // Placeholder for layout alignment
+            )}
+
+            {currentStep < steps.length - 1 ? (
+              <NavigationButton
+                label="Next"
+                direction="right"
+                onClick={() => setCurrentStep(currentStep + 1)}
+              />
+            ) : (
+              <NavigationButton
+                label="Finish"
+                direction="right"
+                onClick={() => {
+                  // Finalize logic here
+                }}
+              />
+            )}
+          </div>
+        </>
       )}
-    </>
+    </div>
   );
 }
-
-
-
