@@ -2,8 +2,7 @@
 import React from "react";
 import { AlertDialogDemo } from "../components/Alert";
 import { ComboboxDemo } from "../components/Comobox";
-import { InputDemo } from "../components/Field";
-import { InputForm } from "../components/Formexample";
+import { TabsDemo } from "../components/Tabs";
 
 export default function Home() {
   return (
@@ -17,7 +16,7 @@ export default function Home() {
         <div className="h-4" />  {/* This is your "extra white line" */}
         <ComboboxDemo />
         <div className="h-12" />  {/* This is your "extra white line" */}
-        <InputForm />
+        <TabsDemo />
     </>
   );
 }

@@ -1,10 +1,7 @@
 // pages/index.tsx
 import React from "react";
-import { ButtonOutline } from "../components/Button";
-import { AlertDialogDemo } from "../components/Alert";
-import { ComboboxDemo } from "../components/Comobox";
-import { InputDemo } from "../components/Field";
-import { InputForm } from "../components/Formexample";
+import { ButtonLink, ButtonOutline, ButtonWithIcon } from "../components/Button";
+import { Button } from "react-day-picker";
 
 
 export default function Home() {
@@ -15,6 +12,8 @@ export default function Home() {
         You dont have any groups yet </p>
         <div className="h-4" />  {/* This is your "extra white line" */}
         <ButtonOutline buttonname="Create groups"/>
+        <div className="h-4" />  {/* This is your "extra white line" */}
+        < ButtonWithIcon/>
 
     </>
   );

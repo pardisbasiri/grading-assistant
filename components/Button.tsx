@@ -20,6 +20,7 @@ export function ButtonOutline({ buttonname, onClick}: ButtonOutlineProps) {
 export function ButtonDestructive() {
   return <Button variant="destructive">Destructive</Button>
 }
+
 export function ButtonGhost() {
   return <Button variant="ghost">Ghost</Button>
 }

@@ -1,7 +1,8 @@
 // pages/index.tsx
 import { ButtonOutline } from "../components/Button";
-import { AssignmentForm } from "../components/FormAssignemnt";
+import { AssignmentForm, FormsAssignment } from "../components/FormAssignemnt";
 import React, { useState } from "react";
+import { FormsAssignmentNew } from "../components/FormAssignemntNew";
 
 export default function Home() {
   // Step 1: State to track whether the form is displayed
@@ -26,7 +27,7 @@ export default function Home() {
           <div className="h-4" /> {/* This is your "extra white line" */}
         </>
       ) : (
-        <AssignmentForm /> // This is where the form will be shown
+        <FormsAssignmentNew /> // This is where the form will be shown
       )}
     </>
   );
