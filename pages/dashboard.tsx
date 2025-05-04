@@ -2,7 +2,7 @@ import React from "react";
 import { AlertDialogDemo } from "../components/Alert";
 import { ComboboxDemo } from "../components/Comobox";
 import { TabsDemo } from "../components/Tabs";
-import { ChartsSideBySide } from "../components/Charts";  // <-- Use this!
+import { ChartsSideBySide } from "../components/Charts";  
 
 export default function Home() {
   return (
