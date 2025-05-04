@@ -4,6 +4,7 @@ import StepProgress from "../components/StepProgress";
 import { FormsAssignment } from "../components/FormAssignemnt";
 import { ButtonOutline } from "../components/Button";
 import NavigationButton from "../components/NavigationButton";
+import { FormsAssignmentNew } from "../components/FormAssignemntNew";
 
 export default function AssignmentsPage() {
   const [showForm, setShowForm] = useState(false);
@@ -19,7 +20,7 @@ export default function AssignmentsPage() {
   const renderStepContent = () => {
     switch (currentStep) {
       case 0:
-        return <FormsAssignment />;
+        return <FormsAssignmentNew />;
       case 1:
         return <p className="text-gray-600">Grading criteria step placeholder</p>;
       case 2:

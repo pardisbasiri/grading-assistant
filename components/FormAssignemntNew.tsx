@@ -1,4 +1,4 @@
-import { CalendarDemo, CalenderField } from "./Calendar";
+import { CalenderField } from "./Calendar";
 import { CheckboxDemo } from "./Checkbox";
 import { ComboboxDemo } from "./Comobox";
 import { ComboboxWithLabel } from "./Comobox2";
