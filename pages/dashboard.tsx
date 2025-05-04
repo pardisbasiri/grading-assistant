@@ -2,9 +2,7 @@
 import React from "react";
 import { AlertDialogDemo } from "../components/Alert";
 import { ComboboxDemo } from "../components/Comobox";
-import { InputDemo } from "../components/Field";
-import { InputForm } from "../components/Formexample";
-import { ChartAverageAttendence, ChartWeightedAverage } from "../components/Charts";
+import { TabsDemo } from "../components/Tabs";
 
 export default function Home() {
   return (
@@ -14,10 +12,11 @@ export default function Home() {
         test dashboard
       </p>
       <div className="h-4" />  {/* This is your "extra white line" */}
-        <ChartWeightedAverage/>
+        <AlertDialogDemo />
         <div className="h-4" />  {/* This is your "extra white line" */}
-        <ChartAverageAttendence/>
-
+        <ComboboxDemo />
+        <div className="h-12" />  {/* This is your "extra white line" */}
+        <TabsDemo />
     </>
   );
 }

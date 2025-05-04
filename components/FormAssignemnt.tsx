@@ -39,7 +39,7 @@ const FormSchema = z.object({ //for the shape, e.g. username must be at least 2 
   }),
 })
 
-export function AssignmentForm() {
+export function FormsAssignment() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
