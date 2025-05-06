@@ -3,7 +3,7 @@ import { Label } from "@radix-ui/react-label"
 import { Button } from "@/components/ui/button"
 
 export function TextareaDemo() {
-  return <Textarea placeholder="Type your message here." />
+  return <Textarea placeholder="Type your general feedback here." />
 }
 
 export function TextareaDisabled() {
@@ -13,8 +13,8 @@ export function TextareaDisabled() {
 export function TextareaWithLabel() {
   return (
     <div className="grid w-full gap-1.5">
-      <Label htmlFor="message">Your message</Label>
-      <Textarea placeholder="Type your message here." id="message" />
+      <Label htmlFor="message">General feedback</Label>
+      <Textarea placeholder="Type your general feedback here." id="message" />
     </div>
   )
 }

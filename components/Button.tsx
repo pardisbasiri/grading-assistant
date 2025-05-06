@@ -4,6 +4,7 @@ import { ChevronRight } from "lucide-react"
 import { MailOpen } from "lucide-react"
 import { Loader2 } from "lucide-react"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
 
 
 type ButtonOutlineProps ={
@@ -13,7 +14,19 @@ type ButtonOutlineProps ={
  
 export function ButtonOutline({ buttonname, onClick}: ButtonOutlineProps) {
   return (
-  <Button onClick={onClick} variant="outline">{buttonname}</Button>
+  <Button 
+  onClick={onClick} variant="outline">{buttonname}</Button>
+  )
+}
+
+export function ButtonOutlineBig({ buttonname, onClick}: ButtonOutlineProps) {
+  return (
+  <Button 
+  onClick={onClick} 
+  variant="outline"
+  className={cn("border-slate-300 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:border-slate-400 w-[400px] h-[200px]")}>
+    {buttonname}
+  </Button>
   )
 }
 
