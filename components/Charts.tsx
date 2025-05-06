@@ -1,8 +1,23 @@
 "use client"
+import React from "react";
 
 import Link from "next/link";
 
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis, Line, LineChart, Area, AreaChart } from "recharts"
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  LabelList,
+  XAxis,
+  Line,
+  LineChart,
+  Area,
+  AreaChart,
+  Label,
+  Pie,
+  PieChart,
+  Cell
+ } from "recharts"
 
 import {
   ChartConfig,
@@ -81,70 +96,94 @@ const chartConfig = {
   group5: { label: "Group 5", color: "hsl(var(--chart-5))" },
 } satisfies ChartConfig
 
+// --- Layout Component ---
 export function ChartsSideBySide() {
   return (
     <div className="space-y-4">
-      <div className="flex w-full flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
-        <ChartWeightedAverage />
-        <ChartAverageAttendance />
+      {/* Row 1 */}
+      <div className="flex w-full flex-col gap-4 md:flex-row">
+        <div className="flex-1"> {/* Wrapper to control width */}
+          <ChartWeightedAverage />
+        </div>
+        <div className="flex-1"> {/* Wrapper to control width */}
+          <ChartAverageAttendance />
+        </div>
       </div>
-      <div className="flex w-full flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
-        <ChartGroupWarnings />
-        <ChartStudentWarnings />
+      {/* Row 2 */}
+      <div className="flex w-full flex-col gap-4 md:flex-row">
+        <div className="flex-1"> {/* Wrapper to control width */}
+          <ChartGroupWarnings />
+        </div>
+        <div className="flex-1"> {/* Wrapper to control width */}
+          <ChartStudentWarnings />
+        </div>
       </div>
-      <div className="flex w-full flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
-        <AssignmentOverview />
+      {/* Row 3 */}
+      <div className="flex w-full flex-col gap-4 md:flex-row">
+        <div className="flex-1"> {/* Wrapper to control width */}
+          <AssignmentOverview />
+        </div>
+         {/* Add another flex-1 div here if you want a second item in this row */}
+         {/* <div className="flex-1"></div> */}
       </div>
     </div>
   );
 }
 
+// --- Common Card Styles ---
 
-const commonCardStyles = "w-full md:w-1/2 p-4 text-sm"
+const commonCardStyles = "flex h-full flex-col";
+
+// --- Chart Components ---
 
 export function ChartWeightedAverage() {
   return (
     <Card className={commonCardStyles}>
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg">Class grade distribution</CardTitle>
+        <CardTitle className="text-base md:text-lg">Class Grade Distribution</CardTitle>
         <CardDescription className="text-xs text-muted-foreground">Grades 1–10</CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
+      {/* flex-1 makes content grow */}
+      <CardContent className="flex-1 pb-0">
+        {/* Define height on container, remove from chart */}
+        <ChartContainer config={chartConfig} className="h-[220px] w-full sm:h-[250px]">
           <BarChart
-            width={320}
-            height={220}
             data={chartData}
-            margin={{ top: 20 }}
+            margin={{ top: 20, right: 10, left: 0, bottom: 0 }}
+            accessibilityLayer
           >
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="grade"
               tickLine={false}
-              tickMargin={10}
+              tickMargin={8}
               axisLine={false}
+              fontSize={11}
             />
+            {/* Optional: Add YAxis if needed */}
+            {/* <YAxis tickLine={false} axisLine={false} fontSize={11} tickMargin={4} /> */}
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="n_student" fill="var(--color-n_student)" radius={6}>
+            <Bar dataKey="n_student" fill="var(--color-n_student)" radius={5}>
               <LabelList
                 position="top"
-                offset={8}
+                offset={6}
                 className="fill-foreground"
-                fontSize={11}
+                fontSize={10}
               />
             </Bar>
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-1 text-xs">
+      <CardFooter className="flex-col items-start gap-1 pt-2 text-xs">
+        {/* Footer content kept */}
         <div className="flex gap-1 font-medium leading-none">
-          Trending up by 5.2% <TrendingUp className="h-3 w-3" />
+          Average Grade: {/* Calculate if possible */} <span className="text-muted-foreground">7.1</span>
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors (last 6 months)
+          Distribution across 41 students
         </div>
       </CardFooter>
     </Card>
@@ -155,16 +194,17 @@ export function ChartAverageAttendance() {
   return (
     <Card className={commonCardStyles}>
       <CardHeader className="pb-2">
-        <CardTitle className="text-base font-medium">Average attendance over time</CardTitle>
-        <CardDescription>April 2025</CardDescription>
+        <CardTitle className="text-base md:text-lg">Average Attendance</CardTitle>
+        <CardDescription className="text-xs text-muted-foreground">April 2025</CardDescription>
       </CardHeader>
-      <CardContent className="pt-0">
-        <ChartContainer config={chartConfig}>
+      {/* flex-1 makes content grow */}
+      <CardContent className="flex-1 pt-0 pb-0">
+         {/* Define height on container, remove from chart */}
+        <ChartContainer config={chartConfig} className="h-[220px] w-full sm:h-[250px]">
           <AreaChart
             data={chart2Data}
-            margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
-            width={undefined}
-            height={200}
+            margin={{ top: 15, right: 10, left: 0, bottom: 0 }}
+            accessibilityLayer
           >
             <CartesianGrid vertical={false} />
             <XAxis
@@ -172,9 +212,12 @@ export function ChartAverageAttendance() {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(4)}
+              fontSize={11}
+              // tickFormatter={(value) => value.slice(4)} // Keep if you like '07', '10' etc.
             />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+             {/* Optional: Add YAxis */}
+             {/* <YAxis tickLine={false} axisLine={false} fontSize={11} domain={['dataMin - 2', 'dataMax + 2']} /> */}
+            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dot"/>} />
             <defs>
               <linearGradient id="fillAttendance" x1="0" y1="0" x2="0" y2="1">
                 <stop
@@ -195,17 +238,18 @@ export function ChartAverageAttendance() {
               fill="url(#fillAttendance)"
               stroke="var(--color-students_inclass)"
               strokeWidth={2}
+               dot={{ r: 3 }}
+               activeDot={{ r: 5 }}
             />
           </AreaChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="pt-0">
-        <div className="flex w-full flex-col gap-1 text-sm">
-          <div className="flex items-center gap-2 font-medium">
-            Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-          </div>
-          <div className="text-muted-foreground">Showing total visitors (last 6 days)</div>
+      <CardFooter className="flex-col items-start gap-1 pt-2 text-xs">
+        {/* Footer content kept */}
+        <div className="flex items-center gap-1 font-medium leading-none">
+          Trending slightly down <TrendingUp className="h-3 w-3 text-destructive rotate-180" />
         </div>
+         <div className="leading-none text-muted-foreground">Compared to last period</div>
       </CardFooter>
     </Card>
   );
@@ -216,47 +260,61 @@ export function ChartGroupWarnings() {
   return (
     <Card className={commonCardStyles}>
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg">Group Alerts</CardTitle>
-        <CardDescription className="text-xs text-muted-foreground">April 2025</CardDescription>
+        <CardTitle className="text-base md:text-lg">Group Alerts</CardTitle>
+        <CardDescription className="text-xs text-muted-foreground">Active Issues - April 2025</CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-2">
-          {chart3Data.map((data) => (
-            <div key={data.group} className="p-3 bg-gray-100 rounded-md">
-              <p className="text-sm font-semibold">{data.group}</p>
+      {/* flex-1 and overflow makes content scrollable and fill height */}
+      <CardContent className="flex-1 space-y-2 overflow-y-auto pt-2 pb-2">
+        {chart3Data.length > 0 ? (
+          chart3Data.map((data) => (
+            <div key={data.group} className="p-2 bg-muted/50 rounded-md border">
+              <p className="text-sm font-medium">{data.group}</p>
               <p className="text-xs text-muted-foreground">{data.message}</p>
             </div>
-          ))}
-        </div>
+          ))
+         ) : (
+           <p className="text-sm text-muted-foreground italic text-center pt-4">No active group alerts.</p>
+         )}
       </CardContent>
+      {/* Optional: Add minimal footer for consistent spacing if needed */}
+       <CardFooter className="pt-2 border-t">
+         <p className="text-xs text-muted-foreground">{chart3Data.length} Active Alerts</p>
+       </CardFooter>
     </Card>
   );
 }
 
 export function ChartStudentWarnings() {
   return (
-    <Card className={`${commonCardStyles} hover:cursor-pointer`}>
-      <Link href="/dashboard2" className="block w-full h-full">
-        <div className="w-full h-full">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Student Alerts</CardTitle>
-            <CardDescription className="text-xs text-muted-foreground">
-              April 2025
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              {chart4Data.map((data) => (
-                <div key={data.student} className="p-3 bg-gray-100 rounded-md">
-                  <p className="text-sm font-semibold">{data.student}</p>
-                  <p className="text-xs text-muted-foreground">{data.message}</p>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </div>
-      </Link>
-    </Card>
+    // Link needs h-full to allow card inside to stretch
+    <Link href="/dashboard2" className="block w-full h-full">
+      {/* Add hover styles to card, common styles for height */}
+      <Card className={`${commonCardStyles} hover:shadow-lg hover:border-primary/50 transition`}>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-base md:text-lg">Student Alerts</CardTitle>
+          <CardDescription className="text-xs text-muted-foreground">
+            Needs Attention - April 2025
+          </CardDescription>
+        </CardHeader>
+        {/* flex-1 and overflow makes content scrollable and fill height */}
+        <CardContent className="flex-1 space-y-2 overflow-y-auto pt-2 pb-2">
+          {chart4Data.length > 0 ? (
+            chart4Data.map((data) => (
+              <div key={data.student} className="p-2 bg-muted/50 rounded-md border">
+                <p className="text-sm font-medium">{data.student}</p>
+                <p className="text-xs text-muted-foreground">{data.message}</p>
+              </div>
+            ))
+          ) : (
+            <p className="text-sm text-muted-foreground italic text-center pt-4">No active student alerts.</p>
+          )}
+        </CardContent>
+         {/* Optional: Add minimal footer for consistent spacing */}
+        <CardFooter className="pt-2 border-t">
+          <p className="text-xs text-muted-foreground">{chart4Data.length} Active Alerts</p>
+        </CardFooter>
+      </Card>
+    </Link>
   );
 }
 
@@ -264,42 +322,49 @@ export function AssignmentOverview() {
   return (
     <Card className={commonCardStyles}>
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg">Assignment Scores</CardTitle>
+        <CardTitle className="text-base md:text-lg">Assignment Scores</CardTitle>
         <CardDescription className="text-xs text-muted-foreground">Comparison across 5 groups</CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
+      {/* flex-1 makes content grow */}
+      <CardContent className="flex-1 pb-0">
+        {/* Define height on container, remove from chart */}
+        <ChartContainer config={chartConfig} className="h-[220px] w-full sm:h-[250px]">
           <BarChart
             data={chart5Data}
-            width={320}
-            height={220}
-            margin={{ top: 20 }}
+            margin={{ top: 20, right: 10, left: 0, bottom: 0 }}
+            accessibilityLayer
+            barGap={4} 
           >
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="Assignment"
               tickLine={false}
-              tickMargin={10}
+              tickMargin={8}
               axisLine={false}
+              fontSize={11}
             />
+             {/* Optional: Add YAxis */}
+            {/* <YAxis tickLine={false} axisLine={false} fontSize={11} domain={[0, 10]} /> */}
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="dashed" />}
             />
-            <Bar dataKey="group1" fill="var(--color-group1)" radius={6} />
-            <Bar dataKey="group2" fill="var(--color-group2)" radius={6} />
-            <Bar dataKey="group3" fill="var(--color-group3)" radius={6} />
-            <Bar dataKey="group4" fill="var(--color-group4)" radius={6} />
-            <Bar dataKey="group5" fill="var(--color-group5)" radius={6} />
+             <ChartLegend content={<ChartLegendContent />} /> {/* Add Legend */}
+            <Bar dataKey="group1" fill="var(--color-group1)" radius={4} /> {/* Smaller radius */}
+            <Bar dataKey="group2" fill="var(--color-group2)" radius={4} />
+            <Bar dataKey="group3" fill="var(--color-group3)" radius={4} />
+            <Bar dataKey="group4" fill="var(--color-group4)" radius={4} />
+            <Bar dataKey="group5" fill="var(--color-group5)" radius={4} />
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-1 text-xs">
+      <CardFooter className="flex-col items-start gap-1 pt-2 text-xs">
+         {/* Footer content kept */}
         <div className="flex gap-1 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-3 w-3" />
+          Group 2 consistently high <TrendingUp className="h-3 w-3 text-success" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing group performance across assignments
+          Showing group performance across 3 assignments
         </div>
       </CardFooter>
     </Card>
