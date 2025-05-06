@@ -1,6 +1,6 @@
 // pages/_app.tsx
 import Head from "next/head";
-import "../styles/globals.css";   // still import your globals (won't hurt)
+import "../styles/globals.css";
 import Layout from "../components/Layout";
 import type { AppProps } from "next/app";
 
