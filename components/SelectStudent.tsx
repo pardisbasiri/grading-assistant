@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/select";
 
 export function SelectScrollable() {
-  // Predefine "Ana Maria Gomez" as the selected value
   const [selectedStudent, setSelectedStudent] = React.useState("anaMariaGomez");
 
   const handleChange = (value: string) => {
@@ -23,7 +22,7 @@ export function SelectScrollable() {
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="Select a student" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="z-50">
         <SelectGroup>
           <SelectLabel>Students</SelectLabel>
           <SelectItem value="anaMariaGomez">Ana Maria Gomez</SelectItem>
