@@ -27,7 +27,8 @@ export default function AssignmentsPage() {
         return  <DynamicCriteriaBuilder/> 
         // return <p className="text-gray-600">Grading criteria step placeholder</p>;
       case 2:
-        return <p className="text-gray-600">Overview step placeholder</p>;
+        return  <StaticOverviewTable/> 
+        // return <p className="text-gray-600">Overview step placeholder</p>;
       default:
         return null;
     }
