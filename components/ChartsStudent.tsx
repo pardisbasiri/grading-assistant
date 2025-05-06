@@ -138,9 +138,7 @@ export function ChartAnaPresence() {
         <CardTitle className="text-base md:text-lg">Attendance</CardTitle>
         <CardDescription className="text-xs text-muted-foreground">Second Semester 2025</CardDescription>
       </CardHeader>
-      {/* flex-1 content area */}
       <CardContent className="flex-1 pb-0">
-        {/* Consistent height, remove aspect-square */}
         <ChartContainer
           config={chartConfig}
           className="mx-auto h-[230px] w-full sm:h-[250px]"
@@ -159,12 +157,10 @@ export function ChartAnaPresence() {
               strokeWidth={2}
               paddingAngle={2}
             >
-              {/* Map using data.fill directly */}
               {chartAnaPresenceData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.fill} />
               ))}
 
-              {/* Center Label */}
               <Label
                 content={({ viewBox }) => {
                   if (viewBox && "cx" in viewBox && "cy" in viewBox) {
@@ -196,7 +192,6 @@ export function ChartAnaPresence() {
                 }}
               />
             </Pie>
-             {/* Add Legend */}
              <ChartLegend
                content={<ChartLegendContent nameKey="status" />}
                className="-mt-4"
@@ -204,7 +199,7 @@ export function ChartAnaPresence() {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-1 text-xs pt-2 border-t"> {/* Style Footer */}
+      <CardFooter className="flex-col gap-1 text-xs pt-2 border-t"> 
          <div className="leading-none text-muted-foreground">
            {((chartAnaPresenceData.find(d => d.status === 'Present')?.n_days ?? 0) / totalDays * 100).toFixed(0)}% Presence Rate
          </div>
@@ -231,9 +226,7 @@ export function ChartAnaGradeScore() {
         <CardTitle className="text-base md:text-lg">Assignment Grades</CardTitle>
         <CardDescription className="text-xs text-muted-foreground">Weighted Average</CardDescription>
       </CardHeader>
-       {/* flex-1 content area */}
       <CardContent className="flex-1 pb-0">
-        {/* Consistent height, remove aspect-square */}
         <ChartContainer
           config={chartConfig}
           className="mx-auto h-[230px] w-full sm:h-[250px]"
@@ -257,12 +250,10 @@ export function ChartAnaGradeScore() {
               strokeWidth={2}
               paddingAngle={2}
             >
-               {/* Map using data.fill directly */}
                {chartAnaGradeData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.fill} />
               ))}
 
-              {/* Center Label */}
               <Label
                 content={({ viewBox }) => {
                   if (viewBox && "cx" in viewBox && "cy" in viewBox) {
@@ -278,7 +269,6 @@ export function ChartAnaGradeScore() {
                           y={(viewBox.cy || 0) - 5}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {/* Display weighted average */}
                           {weightedAverageGrade.toFixed(1)}
                         </tspan>
                         <tspan
@@ -295,7 +285,6 @@ export function ChartAnaGradeScore() {
                 }}
               />
             </Pie>
-             {/* Add Legend */}
              <ChartLegend
                content={<ChartLegendContent nameKey="assignment" />}
                className="-mt-4"
@@ -303,7 +292,7 @@ export function ChartAnaGradeScore() {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-1 text-xs pt-2 border-t"> {/* Style Footer */}
+      <CardFooter className="flex-col gap-1 text-xs pt-2 border-t">
         <div className="leading-none text-muted-foreground">
           Based on {chartAnaGradeData.length} assignments ({totalWeight}% of total grade)
         </div>
@@ -325,19 +314,16 @@ export function ChartSummaryFeedback() {
           Qualitative feedback and details per assignment
         </CardDescription>
       </CardHeader>
-      {/* flex-1 and overflow make content scrollable and fill height */}
-      <CardContent className="flex-1 space-y-3 overflow-y-auto pt-2 pb-2"> {/* Increased space-y */}
+      <CardContent className="flex-1 space-y-3 overflow-y-auto pt-2 pb-2">
         {chartSummaryData.length > 0 ? (
           chartSummaryData.map((item, index) => (
             <div key={index} className="p-3 bg-muted/50 rounded-md border text-sm">
-              {/* Title and Details */}
               <p className="font-semibold mb-1">{item.title}</p>
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground mb-2">
                 <span>Type: {item.type}</span>
                 <span>Weight: {item.weight}</span>
                 <span>Grade: {item.grade}</span>
               </div>
-              {/* Feedback */}
               <p className="text-xs leading-relaxed">{item.Feedback}</p>
             </div>
           ))

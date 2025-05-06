@@ -96,45 +96,35 @@ const chartConfig = {
   group5: { label: "Group 5", color: "hsl(var(--chart-5))" },
 } satisfies ChartConfig
 
-// --- Layout Component ---
 export function ChartsSideBySide() {
   return (
     <div className="space-y-4">
-      {/* Row 1 */}
       <div className="flex w-full flex-col gap-4 md:flex-row">
-        <div className="flex-1"> {/* Wrapper to control width */}
+        <div className="flex-1">
           <ChartWeightedAverage />
         </div>
-        <div className="flex-1"> {/* Wrapper to control width */}
+        <div className="flex-1">
           <ChartAverageAttendance />
         </div>
       </div>
-      {/* Row 2 */}
       <div className="flex w-full flex-col gap-4 md:flex-row">
-        <div className="flex-1"> {/* Wrapper to control width */}
+        <div className="flex-1">
           <ChartGroupWarnings />
         </div>
-        <div className="flex-1"> {/* Wrapper to control width */}
+        <div className="flex-1"> 
           <ChartStudentWarnings />
         </div>
       </div>
-      {/* Row 3 */}
       <div className="flex w-full flex-col gap-4 md:flex-row">
-        <div className="flex-1"> {/* Wrapper to control width */}
+        <div className="flex-1">
           <AssignmentOverview />
         </div>
-         {/* Add another flex-1 div here if you want a second item in this row */}
-         {/* <div className="flex-1"></div> */}
       </div>
     </div>
   );
 }
 
-// --- Common Card Styles ---
-
 const commonCardStyles = "flex h-full flex-col";
-
-// --- Chart Components ---
 
 export function ChartWeightedAverage() {
   return (
@@ -143,9 +133,7 @@ export function ChartWeightedAverage() {
         <CardTitle className="text-base md:text-lg">Class Grade Distribution</CardTitle>
         <CardDescription className="text-xs text-muted-foreground">Grades 1–10</CardDescription>
       </CardHeader>
-      {/* flex-1 makes content grow */}
       <CardContent className="flex-1 pb-0">
-        {/* Define height on container, remove from chart */}
         <ChartContainer config={chartConfig} className="h-[220px] w-full sm:h-[250px]">
           <BarChart
             data={chartData}
@@ -160,11 +148,10 @@ export function ChartWeightedAverage() {
               axisLine={false}
               fontSize={11}
             />
-            {/* Optional: Add YAxis if needed */}
-            {/* <YAxis tickLine={false} axisLine={false} fontSize={11} tickMargin={4} /> */}
+            
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+              content={<ChartTooltipContent hideLabel className="bg-white shadow-lg rounded-lg"/>}
             />
             <Bar dataKey="n_student" fill="var(--color-n_student)" radius={5}>
               <LabelList
@@ -178,9 +165,8 @@ export function ChartWeightedAverage() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-1 pt-2 text-xs">
-        {/* Footer content kept */}
         <div className="flex gap-1 font-medium leading-none">
-          Average Grade: {/* Calculate if possible */} <span className="text-muted-foreground">7.1</span>
+          Average Grade: <span className="text-muted-foreground">7.1</span>
         </div>
         <div className="leading-none text-muted-foreground">
           Distribution across 41 students
@@ -197,9 +183,7 @@ export function ChartAverageAttendance() {
         <CardTitle className="text-base md:text-lg">Average Attendance</CardTitle>
         <CardDescription className="text-xs text-muted-foreground">April 2025</CardDescription>
       </CardHeader>
-      {/* flex-1 makes content grow */}
       <CardContent className="flex-1 pt-0 pb-0">
-         {/* Define height on container, remove from chart */}
         <ChartContainer config={chartConfig} className="h-[220px] w-full sm:h-[250px]">
           <AreaChart
             data={chart2Data}
@@ -213,11 +197,8 @@ export function ChartAverageAttendance() {
               axisLine={false}
               tickMargin={8}
               fontSize={11}
-              // tickFormatter={(value) => value.slice(4)} // Keep if you like '07', '10' etc.
             />
-             {/* Optional: Add YAxis */}
-             {/* <YAxis tickLine={false} axisLine={false} fontSize={11} domain={['dataMin - 2', 'dataMax + 2']} /> */}
-            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dot"/>} />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dot" className="bg-white shadow-lg rounded-lg"/>} />
             <defs>
               <linearGradient id="fillAttendance" x1="0" y1="0" x2="0" y2="1">
                 <stop
@@ -245,7 +226,6 @@ export function ChartAverageAttendance() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-1 pt-2 text-xs">
-        {/* Footer content kept */}
         <div className="flex items-center gap-1 font-medium leading-none">
           Trending slightly down <TrendingUp className="h-3 w-3 text-destructive rotate-180" />
         </div>
@@ -255,7 +235,6 @@ export function ChartAverageAttendance() {
   );
 }
 
-
 export function ChartGroupWarnings() {
   return (
     <Card className={commonCardStyles}>
@@ -263,7 +242,6 @@ export function ChartGroupWarnings() {
         <CardTitle className="text-base md:text-lg">Group Alerts</CardTitle>
         <CardDescription className="text-xs text-muted-foreground">Active Issues - April 2025</CardDescription>
       </CardHeader>
-      {/* flex-1 and overflow makes content scrollable and fill height */}
       <CardContent className="flex-1 space-y-2 overflow-y-auto pt-2 pb-2">
         {chart3Data.length > 0 ? (
           chart3Data.map((data) => (
@@ -276,7 +254,6 @@ export function ChartGroupWarnings() {
            <p className="text-sm text-muted-foreground italic text-center pt-4">No active group alerts.</p>
          )}
       </CardContent>
-      {/* Optional: Add minimal footer for consistent spacing if needed */}
        <CardFooter className="pt-2 border-t">
          <p className="text-xs text-muted-foreground">{chart3Data.length} Active Alerts</p>
        </CardFooter>
@@ -286,9 +263,7 @@ export function ChartGroupWarnings() {
 
 export function ChartStudentWarnings() {
   return (
-    // Link needs h-full to allow card inside to stretch
     <Link href="/dashboard2" className="block w-full h-full">
-      {/* Add hover styles to card, common styles for height */}
       <Card className={`${commonCardStyles} hover:shadow-lg hover:border-primary/50 transition`}>
         <CardHeader className="pb-2">
           <CardTitle className="text-base md:text-lg">Student Alerts</CardTitle>
@@ -296,7 +271,6 @@ export function ChartStudentWarnings() {
             Needs Attention - April 2025
           </CardDescription>
         </CardHeader>
-        {/* flex-1 and overflow makes content scrollable and fill height */}
         <CardContent className="flex-1 space-y-2 overflow-y-auto pt-2 pb-2">
           {chart4Data.length > 0 ? (
             chart4Data.map((data) => (
@@ -309,7 +283,6 @@ export function ChartStudentWarnings() {
             <p className="text-sm text-muted-foreground italic text-center pt-4">No active student alerts.</p>
           )}
         </CardContent>
-         {/* Optional: Add minimal footer for consistent spacing */}
         <CardFooter className="pt-2 border-t">
           <p className="text-xs text-muted-foreground">{chart4Data.length} Active Alerts</p>
         </CardFooter>
@@ -325,9 +298,7 @@ export function AssignmentOverview() {
         <CardTitle className="text-base md:text-lg">Assignment Scores</CardTitle>
         <CardDescription className="text-xs text-muted-foreground">Comparison across 5 groups</CardDescription>
       </CardHeader>
-      {/* flex-1 makes content grow */}
       <CardContent className="flex-1 pb-0">
-        {/* Define height on container, remove from chart */}
         <ChartContainer config={chartConfig} className="h-[220px] w-full sm:h-[250px]">
           <BarChart
             data={chart5Data}
@@ -343,14 +314,13 @@ export function AssignmentOverview() {
               axisLine={false}
               fontSize={11}
             />
-             {/* Optional: Add YAxis */}
-            {/* <YAxis tickLine={false} axisLine={false} fontSize={11} domain={[0, 10]} /> */}
+
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent indicator="dashed" />}
+              content={<ChartTooltipContent indicator="dashed" className="bg-white shadow-lg rounded-lg"/>}
             />
-             <ChartLegend content={<ChartLegendContent />} /> {/* Add Legend */}
-            <Bar dataKey="group1" fill="var(--color-group1)" radius={4} /> {/* Smaller radius */}
+             <ChartLegend content={<ChartLegendContent />} />
+            <Bar dataKey="group1" fill="var(--color-group1)" radius={4} /> 
             <Bar dataKey="group2" fill="var(--color-group2)" radius={4} />
             <Bar dataKey="group3" fill="var(--color-group3)" radius={4} />
             <Bar dataKey="group4" fill="var(--color-group4)" radius={4} />
@@ -359,7 +329,6 @@ export function AssignmentOverview() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-1 pt-2 text-xs">
-         {/* Footer content kept */}
         <div className="flex gap-1 font-medium leading-none">
           Group 2 consistently high <TrendingUp className="h-3 w-3 text-success" />
         </div>
