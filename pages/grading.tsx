@@ -50,7 +50,6 @@ export default function GradingPage() {
           <div className="h-6" />
           {renderStepContent()}
 
-          {/* Navigation buttons */}
           <div className="mt-8 flex justify-between">
             {currentStep > 0 ? (
               <NavigationButton
@@ -59,7 +58,7 @@ export default function GradingPage() {
                 onClick={() => setCurrentStep(currentStep - 1)}
               />
             ) : (
-              <div /> // Placeholder for layout alignment
+              <div /> 
             )}
 
             {currentStep < steps.length - 1 ? (
@@ -73,7 +72,6 @@ export default function GradingPage() {
                 label="Finish"
                 direction="right"
                 onClick={() => {
-                  // Finalize logic here
                 }}
               />
             )}
