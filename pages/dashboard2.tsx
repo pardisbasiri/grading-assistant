@@ -1,4 +1,4 @@
-// src/pages/Dashboard2.jsx
+// src/pages/Dashboard2.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
@@ -6,41 +6,30 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { SelectScrollable } from "../components/SelectStudent";
 import { TableStudentInfo } from "../components/TableStudentInfo";
-import { ChartsSideBySide, ChartSummaryFeedback } from "../components/ChartsStudent";
+import { ChartsSideBySide } from "../components/ChartsStudent";
 import { SendMessageCard } from "../components/SendMessageCard";
 
-interface Student {
+const ANA_MARIA_SELECT_VALUE = "anaMariaGomez";
+
+interface StudentData {
   id: string;
   name: string;
 }
 
-const getCurrentlyViewedStudent = (): Student | null => {
-  return {
-    id: "ana-maria-gomez-id",
-    name: "Ana Maria Gomez" 
-  };
+const ANA_MARIA_DATA: StudentData = {
+  id: "ana-maria-gomez-unique-id",
+  name: "Ana Maria Gomez"
 };
 
 export default function Dashboard2() {
-  const [currentStudent, setCurrentStudent] = useState<Student | null>(null);
+  const [selectedStudentValue, setSelectedStudentValue] = useState<string>(ANA_MARIA_SELECT_VALUE);
 
-  useEffect(() => {
-    const studentData = getCurrentlyViewedStudent();
-    setCurrentStudent(studentData);
-  }, []);
-
-  const handleStudentSelect = (studentId: string) => {
-    console.log("Student selected in Dashboard2 (example):", studentId);
-    if (studentId === "some-other-id") {
-      setCurrentStudent({ id: "some-other-id", name: "Some Other Student"});
-    } else if (studentId === "ana-maria-gomez-id") {
-      setCurrentStudent(getCurrentlyViewedStudent());
-    } else {
-      setCurrentStudent(null);
-    }
+  const handleStudentSelect = (valueFromSelect: string) => {
+    setSelectedStudentValue(valueFromSelect);
   };
 
-  
+  const showAnaMariaDetails = selectedStudentValue === ANA_MARIA_SELECT_VALUE;
+
   return (
     <div className="p-6 space-y-10">
       <div className="flex items-center gap-3">
@@ -49,24 +38,41 @@ export default function Dashboard2() {
             <ArrowLeft />
           </Link>
         </Button>
-        <h1 className="text-4xl font-bold">Student Alerts</h1>
+        <h1 className="text-4xl font-bold">
+          {showAnaMariaDetails ? `${ANA_MARIA_DATA.name}'s Dashboard & Alerts` : "Student Details"}
+        </h1>
       </div>
 
       <div>
-        <SelectScrollable />
+        <SelectScrollable
+          onSelect={handleStudentSelect}
+          initialValue={selectedStudentValue}
+        />
       </div>
 
-      <div>
-        <TableStudentInfo />
-      </div>
-
-      <div>
-        <ChartsSideBySide/>
-      </div>
-
-      <div className="mt-8">
-        <SendMessageCard />
+      {showAnaMariaDetails ? (
+        // If "Ana Maria Gomez" is selected, show her components
+        <>
+          <div>
+            <TableStudentInfo studentData={ANA_MARIA_DATA} />
+          </div>
+          <div>
+            <ChartsSideBySide studentId={ANA_MARIA_DATA.id} />
+          </div>
+          <div className="mt-8">
+            <SendMessageCard />
+          </div>
+        </>
+      ) : (
+        <div className="text-center border rounded-md p-10 mt-6 bg-muted/50">
+          <p className="text-lg font-medium text-muted-foreground">
+            This page has not been developed yet for the selected student.
+          </p>
+          <p className="text-sm text-muted-foreground mt-2">
+            (Prototype currently supports full details for Ana Maria Gomez only)
+          </p>
         </div>
+      )}
     </div>
   );
 }

@@ -97,36 +97,34 @@ const chartConfig = {
 
 } satisfies ChartConfig
 
-// --- Layout ---
-export function ChartsSideBySide() {
+interface ChartsSideBySideProps {
+  studentId: string;
+}
+
+export function ChartsSideBySide({ studentId }: ChartsSideBySideProps) {
+  console.log("ChartsSideBySide rendered for studentId:", studentId);
+
   return (
     <div className="space-y-4">
-      {/* Row 1: Attendance and Grade Charts */}
       <div className="flex w-full flex-col gap-4 md:flex-row">
-        <div className="flex-1"> {/* Wrapper */}
+        <div className="flex-1">
           <ChartAnaPresence />
         </div>
-        <div className="flex-1"> {/* Wrapper */}
+        <div className="flex-1">
           <ChartAnaGradeScore />
         </div>
       </div>
 
-      {/* Row 2: Feedback Summary */}
       <div className="flex w-full flex-col gap-4 md:flex-row">
-        <div className="flex-1"> {/* Wrapper */}
-          <ChartSummaryFeedback /> {/* Add the new component here */}
+        <div className="flex-1">
+          <ChartSummaryFeedback />
         </div>
-         {/* You could add another <div className="flex-1"><AnotherCard /></div> here later */}
       </div>
-
     </div>
   );
 }
 
-// --- Common Card Styles ---
 const commonCardStyles = "flex h-full flex-col";
-
-// --- Components ---
 
 export function ChartAnaPresence() {
   const totalDays = React.useMemo(() => {

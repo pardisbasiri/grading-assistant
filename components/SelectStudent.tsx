@@ -1,5 +1,5 @@
+// components/SelectStudent.tsx
 import * as React from "react";
-
 import {
   Select,
   SelectContent,
@@ -10,19 +10,29 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function SelectScrollable() {
-  const [selectedStudent, setSelectedStudent] = React.useState("anaMariaGomez");
+interface SelectScrollableProps {
+  onSelect: (selectedValue: string) => void;
+  initialValue?: string;
+}
+
+export function SelectScrollable({ onSelect, initialValue = "anaMariaGomez" }: SelectScrollableProps) {
+  const [selectedValue, setSelectedValue] = React.useState(initialValue);
 
   const handleChange = (value: string) => {
-    setSelectedStudent(value);
+    setSelectedValue(value); 
+    onSelect(value);
   };
 
+  React.useEffect(() => {
+    setSelectedValue(initialValue);
+  }, [initialValue]);
+
   return (
-    <Select value={selectedStudent} onValueChange={handleChange}>
+    <Select value={selectedValue} onValueChange={handleChange}>
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="Select a student" />
       </SelectTrigger>
-      <SelectContent className="z-50">
+      <SelectContent className="bg-white shadow-lg rounded-lg">
         <SelectGroup>
           <SelectLabel>Students</SelectLabel>
           <SelectItem value="anaMariaGomez">Ana Maria Gomez</SelectItem>
