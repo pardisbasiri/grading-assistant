@@ -150,7 +150,7 @@ export function ChartAnaPresence() {
           <PieChart>
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel nameKey="status" />}
+              content={<ChartTooltipContent hideLabel nameKey="status" className="bg-white shadow-lg rounded-lg" />}
             />
             <Pie
               data={chartAnaPresenceData}
@@ -246,6 +246,7 @@ export function ChartAnaGradeScore() {
 
               content={<ChartTooltipContent
                           nameKey="assignment"
+                          className="bg-white shadow-lg rounded-lg"
                           formatter={(value, name, props) => `${props.payload.grade.toFixed(1)} (${props.payload.weight}%)`}
                        />}
             />
