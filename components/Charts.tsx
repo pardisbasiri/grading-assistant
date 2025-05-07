@@ -39,6 +39,12 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
+const BLUE_SHADE_1 = "hsl(210, 60%, 55%)";
+const BLUE_SHADE_2 = "hsl(210, 60%, 65%)";
+const BLUE_SHADE_3 = "hsl(210, 60%, 45%)";
+const BLUE_SHADE_4 = "hsl(210, 60%, 75%)";
+const BLUE_SHADE_5 = "hsl(210, 60%, 35%)";
+
 const chartData = [
   { grade: "1", n_student: 0 },
   { grade: "2", n_student: 0 },
@@ -83,17 +89,17 @@ const chart5Data = [
 const chartConfig = {
   n_student: {
     label: "Number of students ",
-    color: "hsl(var(--chart-1))",
+    color: BLUE_SHADE_1,
   },
   students_inclass: {
     label: "Students in class",
-    color: "hsl(var(--chart-1))",
+    color: BLUE_SHADE_2,
   },
-  group1: { label: "Group 1", color: "hsl(var(--chart-1))" },
-  group2: { label: "Group 2", color: "hsl(var(--chart-2))" },
-  group3: { label: "Group 3", color: "hsl(var(--chart-3))" },
-  group4: { label: "Group 4", color: "hsl(var(--chart-4))" },
-  group5: { label: "Group 5", color: "hsl(var(--chart-5))" },
+  group1: { label: "Group 1", color: BLUE_SHADE_1 },
+  group2: { label: "Group 2", color: BLUE_SHADE_2 },
+  group3: { label: "Group 3", color: BLUE_SHADE_3 },
+  group4: { label: "Group 4", color: BLUE_SHADE_4 },
+  group5: { label: "Group 5", color: BLUE_SHADE_5 },
 } satisfies ChartConfig
 
 export function ChartsSideBySide() {
