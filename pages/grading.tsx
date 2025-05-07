@@ -2,13 +2,26 @@
 import React, { useState } from "react";
 import StepProgress from "../components/StepProgress";
 import { FormsAssignment } from "../components/FormAssignemnt";
-import { ButtonOutline, ButtonOutlineBig } from "../components/Button";
+import { ButtonOutline } from "../components/Button";
 import NavigationButton from "../components/NavigationButton";
 import { FormsAssignmentNew } from "../components/FormAssignemntNew";
 import { DynamicCriteriaBuilder } from "../components/DynamicCriteriaBuilder copy 2";
 import { StaticOverviewTable } from "../components/StaticOverviewTable";
 import { GradingOne } from "../components/Grading1";
 import { StudentGradingTabs } from "../components/Grading2";
+import { AssignmentGradingCard } from "../components/AssignmentGradingCard";
+
+interface Assignment {
+  id: string;
+  name: string;
+  dueDate: string;
+  deliveryStatus: string;
+  gradingStatus: string;
+}
+
+const assignmentsData: Assignment[] = [
+  { id: "assign-1", name: "Finding user needs", dueDate: "6 May", deliveryStatus: "Delivered by all the groups", gradingStatus: "Not graded yet" },
+];
 
 export default function GradingPage() {
   const [showForm, setShowForm] = useState(false);
@@ -42,7 +55,18 @@ export default function GradingPage() {
         <>
           <p className="text-gray-600">Choose assignment to grade:</p>
           <div className="h-8" />
-          <ButtonOutlineBig buttonname="Finding user needs" onClick={handleCreateAssignment} />
+          {assignmentsData.map((assignmentItem) => (
+            <AssignmentGradingCard
+            key={assignmentItem.id}
+            id={assignmentItem.id}
+            name={assignmentItem.name}
+            dueDate={assignmentItem.dueDate} 
+            deliveryStatus={assignmentItem.deliveryStatus} 
+            gradingStatus={assignmentItem.gradingStatus}
+            onClick={handleCreateAssignment}
+  />
+))}
+          
         </>
       ) : (
         <>
