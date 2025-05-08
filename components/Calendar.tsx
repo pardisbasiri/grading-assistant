@@ -26,50 +26,40 @@ export function CalendarDemo() {
 }
 
 
-
 export function CalenderField() {
   const [date, setDate] = useState<Date | undefined>();
-  // 1. Add state to control Popover visibility
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  // Optional: Add an ID for label association (good practice)
   const triggerId = React.useId();
 
-  // 3. Define a handler for date selection
   const handleDateSelect = (selectedDate: Date | undefined) => {
     setDate(selectedDate);
-    setIsPopoverOpen(false); // <-- Close the popover here
+    setIsPopoverOpen(false);
   };
 
   return (
-    // Use grid layout similar to the Combobox example for consistency
     <div className="grid w-full max-w-sm items-center gap-1.5">
-      {/* Use Shadcn Label for consistency */}
       <Label htmlFor={triggerId}>Due date of the assignment:</Label>
 
-      {/* 2. Control the Popover's open state */}
       <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
         <PopoverTrigger asChild>
           <Button
-            id={triggerId} // Add id for label
+            id={triggerId} 
             variant="outline"
             className={cn(
-              "w-[240px] justify-start text-left font-normal", // Use justify-start for better alignment
+              "w-[240px] justify-start text-left font-normal",
               !date && "text-muted-foreground"
             )}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" /> {/* Add margin-right */}
+            <CalendarIcon className="mr-2 h-4 w-4" /> 
             {date ? format(date, "PPP") : <span>Pick a date</span>}
-            {/* No need for the second CalendarIcon here */}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0 bg-white shadow-lg rounded-lg" align="start"> {/* Removed redundant styling */}
+        <PopoverContent className="w-auto p-0 z-50 bg-white shadow-lg rounded-md" align="start">
           <Calendar
             mode="single"
             selected={date}
-            // 3. Use the new handler for onSelect
             onSelect={handleDateSelect}
-            // Optional: Disable past dates if needed (example)
-            // disabled={(d) => d < new Date(new Date().setHours(0, 0, 0, 0))}
+            disabled={(d) => d < new Date(new Date().setHours(0, 0, 0, 0))}
             initialFocus
           />
         </PopoverContent>
