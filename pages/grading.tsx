@@ -20,7 +20,7 @@ interface Assignment {
 }
 
 const assignmentsData: Assignment[] = [
-  { id: "assign-1", name: "Finding user needs", dueDate: "6 May", deliveryStatus: "Delivered by all the groups", gradingStatus: "Not graded yet" },
+  { id: "assign-1", name: "Finding user needs", dueDate: "20 May", deliveryStatus: "Group 5", gradingStatus: "Not graded yet" },
 ];
 
 export default function GradingPage() {
