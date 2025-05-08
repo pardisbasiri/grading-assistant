@@ -9,6 +9,7 @@ import {
   CartesianGrid,
   LabelList,
   XAxis,
+  YAxis,
   Line,
   LineChart,
   Area,
@@ -320,10 +321,16 @@ export function AssignmentOverview() {
               axisLine={false}
               fontSize={11}
             />
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickCount={3}
+            />
 
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent indicator="dashed" className="bg-white shadow-lg rounded-lg"/>}
+              content={<ChartTooltipContent indicator="line" className="bg-white shadow-lg rounded-lg"/>}
             />
              <ChartLegend content={<ChartLegendContent />} />
             <Bar dataKey="group1" fill="var(--color-group1)" radius={4} /> 
