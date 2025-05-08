@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import StepProgress from "../components/StepProgress";
 import { FormsAssignment } from "../components/FormAssignemnt";
 import { ButtonOutline } from "../components/Button";
+import { Button } from "@/components/ui/button";
 import NavigationButton from "../components/NavigationButton";
 import { FormsAssignmentNew } from "../components/FormAssignemntNew";
 import { DynamicCriteriaBuilder } from "../components/DynamicCriteriaBuilder copy 2";
@@ -40,9 +41,12 @@ export default function AssignmentsPage() {
 
       {!showForm ? (
         <>
-          <p className="text-gray-600">You don't have any assignments yet</p>
+          <p className="text-gray-600">You don't have any assignments yet.</p>
           <div className="h-4" />
-          <ButtonOutline buttonname="Create assignment" onClick={handleCreateAssignment} />
+          <Button onClick={handleCreateAssignment} className="bg-gray-900 text-white hover:bg-gray-800">
+  Create Assignment
+</Button>
+
         </>
       ) : (
         <>

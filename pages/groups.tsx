@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import StepProgress from "../components/StepProgress";
-import { SliderDemo as Slider } from "../components/Slider";
+import { SliderDemo3 as Slider } from "../components/Slider";
 import { ButtonOutline } from "../components/Button";
 import NavigationButton from "../components/NavigationButton";
 import StudentGroupManager from "../components/StudentGrouping/StudentGroupManager";
@@ -44,9 +44,10 @@ export default function GroupsPage() {
   
       {!creatingGroups ? (
         <>
-          <p className="text-gray-600">You don’t have any groups yet</p>
-          <div className="h-4" />
-          <ButtonOutline buttonname="Create groups" onClick={handleCreateClick} />
+          <p className="text-gray-600">You don’t have any groups yet.</p>
+          <div className="h-4" /><Button onClick={handleCreateClick} className="bg-[#1F2937] text-white">
+  Create Group
+</Button><Button onClick={handleCreateClick} className="bg-primary text-white"> Create groups </Button>
         </>
       ) : (
         <>
@@ -66,7 +67,7 @@ export default function GroupsPage() {
               <>
                 <div className="flex justify-between items-center mb-4">
                   <p className="text-gray-600">
-                    Assign students to groups by dragging them below
+                    Drag and drop students to assign them to different groups.
                   </p>
                   <div className="flex gap-2">
                     <Button variant="outline" onClick={handleAddGroup}>
@@ -85,8 +86,26 @@ export default function GroupsPage() {
   
             {currentStep === 2 && (
               <>
-                <p className="text-gray-600 mb-4">Overview of group setup</p>
-                {/* Final review logic or confirmation UI can go here */}
+                
+                <div className="mt-4 mb-2">
+    <div className="border rounded-md p-4 w-fit">
+      <p className="font-semibold mb-2">Overview:</p>
+      <div className="flex flex-col space-y-1">
+        <div className="flex justify-between w-64">
+          <span className="text-sm text-gray-700">Amount of students</span>
+          <span className="text-sm font-medium text-gray-900">30</span>
+        </div>
+        <div className="flex justify-between w-64">
+          <span className="text-sm text-gray-700">Amount of groups</span>
+          <span className="text-sm font-medium text-gray-900">6</span>
+        </div>
+        <div className="flex justify-between w-64">
+          <span className="text-sm text-gray-700">Students per group</span>
+          <span className="text-sm font-medium text-gray-900">5</span>
+        </div>
+      </div>
+    </div>
+  </div>
               </>
             )}
           </div>
@@ -97,10 +116,9 @@ export default function GroupsPage() {
               label="Back"
               direction="left"
               onClick={handleBack}
-              disabled={currentStep === 0}
             />
             <NavigationButton
-              label={currentStep === steps.length - 1 ? "Finish" : "Next"}
+              label={currentStep === steps.length - 1 ? "Publish" : "Next"}
               direction="right"
               onClick={handleNext}
             />

@@ -1,5 +1,5 @@
 // components/grouping/StudentGroupManager.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GroupColumn from './GroupColumn';
 import { Student } from './DraggableStudentCard';
 import { DndProvider } from 'react-dnd';
@@ -65,6 +65,33 @@ export default function StudentGroupManager() {
   const [groups, setGroups] = useState<Student[][]>(initialGroups);
   const [groupToDelete, setGroupToDelete] = useState<number | null>(null);
 
+  useEffect(() => {
+    const addGroupHandler = () => {
+      setGroups((prev) => [[], ...prev]);
+    };
+
+    const shuffleHandler = () => {
+      const allStudents = groups.flat();
+      const shuffled = [...allStudents].sort(() => Math.random() - 0.5);
+      const groupCount = groups.length;
+      const newGroups: Student[][] = Array.from({ length: groupCount }, () => []);
+
+      shuffled.forEach((student, i) => {
+        newGroups[i % groupCount].push(student);
+      });
+
+      setGroups(newGroups);
+    };
+
+    window.addEventListener("add-group", addGroupHandler);
+    window.addEventListener("shuffle-students", shuffleHandler);
+
+    return () => {
+      window.removeEventListener("add-group", addGroupHandler);
+      window.removeEventListener("shuffle-students", shuffleHandler);
+    };
+  }, [groups]);
+
   const handleDropStudent = (targetGroupId: number, student: Student) => {
     setGroups((prevGroups) => {
       const updatedGroups = prevGroups.map((group) =>
@@ -113,24 +140,38 @@ export default function StudentGroupManager() {
       </div>
 
       <AlertDialog open={groupToDelete !== null} onOpenChange={() => setGroupToDelete(null)}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Delete this group?</AlertDialogTitle>
-            <AlertDialogDescription>
-              What should we do with the students in this group?
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction onClick={() => confirmDeleteGroup('move')}>
-              Move them to the last group
-            </AlertDialogAction>
-            <AlertDialogAction onClick={() => confirmDeleteGroup('redistribute')}>
-              Redistribute randomly
-            </AlertDialogAction>
-            <AlertDialogCancel>Cancel and reassign manually</AlertDialogCancel>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <AlertDialogContent className="!max-w-4xl w-full bg-white rounded-lg shadow-xl p-6 z-50">
+  <AlertDialogHeader>
+    <AlertDialogTitle className="text-lg font-semibold">
+      Delete this group?
+    </AlertDialogTitle>
+    <AlertDialogDescription className="text-sm text-gray-600 mt-2">
+      What should we do with the students in this group?
+    </AlertDialogDescription>
+  </AlertDialogHeader>
+  <AlertDialogFooter className="flex flex-wrap sm:flex-nowrap gap-4 mt-4 justify-start">
+  <AlertDialogAction
+  onClick={() => confirmDeleteGroup('move')}
+  className="text-red-600 border border-input shadow-sm hover:bg-transparent"
+>
+  Move them to the last group
+</AlertDialogAction>
+
+<AlertDialogAction
+  onClick={() => confirmDeleteGroup('redistribute')}
+  className="text-red-600 border border-input shadow-sm hover:bg-transparent"
+>
+  Redistribute randomly
+</AlertDialogAction>
+
+  <AlertDialogCancel>
+    Cancel and reassign manually
+  </AlertDialogCancel>
+</AlertDialogFooter>
+</AlertDialogContent>
+
+</AlertDialog>
+
     </DndProvider>
   );
 }
