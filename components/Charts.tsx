@@ -173,7 +173,7 @@ export function ChartWeightedAverage() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-1 pt-2 text-xs">
         <div className="flex gap-1 font-medium leading-none">
-          Average Grade: <span className="text-muted-foreground">7.1</span>
+          Average Grade: <span className="text-muted-foreground">6.9</span>
         </div>
         <div className="leading-none text-muted-foreground">
           Distribution across 30 students
