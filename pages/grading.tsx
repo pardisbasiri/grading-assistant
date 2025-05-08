@@ -10,6 +10,7 @@ import { StaticOverviewTable } from "../components/StaticOverviewTable";
 import { GradingOne } from "../components/Grading1";
 import { StudentGradingTabs } from "../components/Grading2";
 import { AssignmentGradingCard } from "../components/AssignmentGradingCard";
+import { StudentOverviewTable } from "../components/OverviewTable";
 
 interface Assignment {
   id: string;
@@ -39,9 +40,9 @@ export default function GradingPage() {
       case 0:
         return  <GradingOne/>
       case 1:
-        return <p className="text-gray-600">Personal grading</p>;
+        return <StudentGradingTabs/>
       case 2:
-        return <p className="text-gray-600">Summary</p>;
+      return <h1> placeholder </h1>
       default:
         return null;
     }
