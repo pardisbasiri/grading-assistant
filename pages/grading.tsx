@@ -42,7 +42,7 @@ export default function GradingPage() {
       case 1:
         return <StudentGradingTabs/>
       case 2:
-      return <h1> placeholder </h1>
+      return <StudentOverviewTable/>
       default:
         return null;
     }
