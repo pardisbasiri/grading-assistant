@@ -51,12 +51,12 @@ const chartData = [
   { grade: "2", n_student: 0 },
   { grade: "3", n_student: 2 },
   { grade: "4", n_student: 3 },
-  { grade: "5", n_student: 1 },
-  { grade: "6", n_student: 6 },
-  { grade: "7", n_student: 12 },
-  { grade: "8", n_student: 8 },
-  { grade: "9", n_student: 7 },
-  { grade: "10", n_student: 2 },
+  { grade: "5", n_student: 0 },
+  { grade: "6", n_student: 5 },
+  { grade: "7", n_student: 10 },
+  { grade: "8", n_student: 3 },
+  { grade: "9", n_student: 6 },
+  { grade: "10", n_student: 1 },
 ]
 
 const chart2Data = [
@@ -66,7 +66,7 @@ const chart2Data = [
   { day: "Apr 17", students_inclass: 29 },
   { day: "Apr 21", students_inclass: 26 },
   { day: "Apr 24", students_inclass: 30 },
-  { day: "Apr 28", students_inclass: 27 },
+  { day: "Apr 28", students_inclass: 25 },
 ]
 
 const chart3Data = [
@@ -176,7 +176,7 @@ export function ChartWeightedAverage() {
           Average Grade: <span className="text-muted-foreground">7.1</span>
         </div>
         <div className="leading-none text-muted-foreground">
-          Distribution across 41 students
+          Distribution across 30 students
         </div>
       </CardFooter>
     </Card>
