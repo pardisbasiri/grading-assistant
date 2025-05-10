@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 const initialGroups: Student[][] = [
+  // Group 1
   [
     { id: '1', name: 'Hugo Martin', major: 'Computer Science' },
     { id: '2', name: 'Elena Sanchez', major: 'Computer Science' },
@@ -24,37 +25,42 @@ const initialGroups: Student[][] = [
     { id: '4', name: 'Sofia Molina', major: 'HCID' },
     { id: '5', name: 'Andrian Castillo', major: 'HCID' },
   ],
+  // Group 2
   [
-    { id: '6', name: 'Hugo Martin', major: 'Computer Science' },
-    { id: '7', name: 'Elena Sanchez', major: 'Computer Science' },
-    { id: '8', name: 'Daniel Torrez', major: 'Psychology' },
-    { id: '9', name: 'Sofia Molina', major: 'HCID' },
-    { id: '10', name: 'Andrian Castillo', major: 'HCID' },
+    { id: '6', name: 'Erik Johansson', major: 'Computer Science' },
+    { id: '7', name: 'Yuki Tanaka', major: 'Computer Science' },
+    { id: '8', name: 'Elena Sanchez', major: 'Psychology' },
+    { id: '9', name: 'Luca Moretti', major: 'HCID' },
+    { id: '10', name: 'Aisha Khan', major: 'HCID' },
   ],
+  // Group 3
   [
-    { id: '11', name: 'Hugo Martin', major: 'Computer Science' },
-    { id: '12', name: 'Elena Sanchez', major: 'Computer Science' },
-    { id: '13', name: 'Daniel Torrez', major: 'Psychology' },
-    { id: '14', name: 'Sofia Molina', major: 'HCID' },
-    { id: '15', name: 'Andrian Castillo', major: 'HCID' },
+    { id: '11', name: 'Maria Hernandez', major: 'Computer Science' },
+    { id: '12', name: 'Mia Nilsson', major: 'Computer Science' },
+    { id: '13', name: 'Fatima El-Sayed', major: 'Psychology' },
+    { id: '14', name: 'David Johnson', major: 'HCID' },
+    { id: '15', name: 'Chen Wei', major: 'HCID' },
   ],
+  // Group 4
   [
-    { id: '16', name: 'Hugo Martin', major: 'Computer Science' },
-    { id: '17', name: 'Elena Sanchez', major: 'Computer Science' },
-    { id: '18', name: 'Daniel Torrez', major: 'Psychology' },
-    { id: '19', name: 'Sofia Molina', major: 'HCID' },
-    { id: '20', name: 'Andrian Castillo', major: 'HCID' },
+    { id: '16', name: 'Tomasz Kowalski', major: 'Computer Science' },
+    { id: '17', name: 'Anna Nowak', major: 'Computer Science' },
+    { id: '18', name: 'Marco Rossi', major: 'Psychology' },
+    { id: '19', name: 'Sofia Ivanov', major: 'HCID' },
+    { id: '20', name: 'Kai Yamamoto', major: 'HCID' },
   ],
+  // Group 5
   [
-    { id: '21', name: 'Hugo Martin', major: 'Computer Science' },
-    { id: '22', name: 'Elena Sanchez', major: 'Computer Science' },
-    { id: '23', name: 'Daniel Torrez', major: 'Psychology' },
-    { id: '24', name: 'Sofia Molina', major: 'HCID' },
-    { id: '25', name: 'Andrian Castillo', major: 'HCID' },
+    { id: '21', name: 'Alejandro Fernandez', major: 'Computer Science' },
+    { id: '22', name: 'Ana Maria Gomez', major: 'Computer Science' },
+    { id: '23', name: 'Gabriel López', major: 'Psychology' },
+    { id: '24', name: 'Elena Martinez', major: 'HCID' },
+    { id: '25', name: 'Beatriz Torres', major: 'HCID' },
   ],
+  // Group 6
   [
     { id: '26', name: 'Javier Castillo', major: 'Computer Science' },
-    { id: '27', name: 'Elena Castigez', major: 'Computer Science' },
+    { id: '27', name: 'Elena Castillez', major: 'Computer Science' },
     { id: '28', name: 'Lucia Torrez', major: 'Psychology' },
     { id: '29', name: 'Patricia Vega', major: 'HCID' },
     { id: '30', name: 'Sergio Vargas', major: 'HCID' },

@@ -18,6 +18,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { cn } from "@/lib/utils";
 import { AlertDialogPublish, AlertDialogSave } from "./Alert";
 import { AlertDialogPortal } from "@radix-ui/react-alert-dialog";
+import { showCustomToast } from "../components/CustomToast"
 
 // --- Interfaces and Type Definitions ---
 
@@ -172,12 +173,15 @@ export function StaticOverviewTable({ className }: { className?: string }) {
               </TableBody>
            </Table>
        </div>
-
-       {/* Save/Publish Buttons */}
-       <div className="flex justify-start space-x-3 pt-4">
-       <AlertDialogSave/>
-       <AlertDialogPublish/>
-       </div>
-     </div>
-  );
+{/* Save Button */}
+<div className="flex justify-start space-x-3 pt-4">
+  <Button
+  variant="outline"
+  onClick={() => showCustomToast("Successfully saved", () => console.log("Undo Save clicked"))}
+>
+  Save Progress
+</Button>
+</div>
+</div>
+);
 } // End of StaticOverviewTable component

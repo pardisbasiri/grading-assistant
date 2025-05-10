@@ -22,10 +22,10 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        "flex items-center px-4 py-2 rounded-md border text-sm font-medium transition-colors",
+        "flex items-center h-9 px-4 py-2 rounded-md border text-sm font-medium transition-colors",
         disabled
           ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-          : "bg-gray-800 text-white hover:bg-gray-700",
+          : "bg-gray-900 text-white hover:bg-gray-800",           // ✅ match Publish button color
         className
       )}
     >
