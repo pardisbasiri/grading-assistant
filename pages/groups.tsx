@@ -89,17 +89,15 @@ export default function GroupsPage() {
                     How many groups do you want?
                   </label>
                   <Input
-                    id="group-number"
-                    type="number"
-                    min={1}
-                    max={30}
-                    value={groupNumber}
-                    placeholder="Enter number"
-                    onChange={(e) =>
-                      setGroupNumber(e.target.value === "" ? "" : Number(e.target.value))
-                    }
-                    className="w-40 placeholder:text-muted-foreground"
-                  />
+  id="group-number"
+  type="number"
+  min={1}
+  max={30}
+  value={groupNumber}
+  placeholder="Enter number"
+  onChange={(e) => setGroupNumber(e.target.value)}
+  className="w-40 placeholder:text-muted-foreground"
+/>
                 </div>
 
                 <div className="flex flex-col gap-2">
