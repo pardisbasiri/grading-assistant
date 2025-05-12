@@ -25,7 +25,7 @@ export default function Sidebar() {
             key={item.label}
             href={item.href}
             className={cn(
-              "flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-primary hover:bg-muted",
+              "flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-100",
             )}
           >
             <item.icon className="h-5 w-5" />
