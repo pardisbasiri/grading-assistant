@@ -31,7 +31,7 @@ export function GroupsListView({ onGroup5Click }: { onGroup5Click: () => void })
       name: "Group 2",
       students: [
         { id: "6", name: "Erik Johansson", major: "Computer Science" },
-        { id: "7", name: "Yuki Tanaka", major: "Computer Science" },
+        { id: "7", name: "Ana Maria Gomez", major: "Computer Science" },
         { id: "8", name: "Elena Sanchez", major: "Psychology" },
         { id: "9", name: "Luca Moretti", major: "HCID" },
         { id: "10", name: "Aisha Khan", major: "HCID" },
@@ -64,7 +64,7 @@ export function GroupsListView({ onGroup5Click }: { onGroup5Click: () => void })
       name: "Group 5",
       students: [
         { id: "21", name: "Alejandro Fernandez", major: "Computer Science" },
-        { id: "22", name: "Ana Maria Gomez", major: "Computer Science" },
+        { id: "22", name: "Yuki Tanaka", major: "Computer Science" },
         { id: "23", name: "Gabriel López", major: "Psychology" },
         { id: "24", name: "Elena Martinez", major: "HCID" },
         { id: "25", name: "Beatriz Torres", major: "HCID" },
