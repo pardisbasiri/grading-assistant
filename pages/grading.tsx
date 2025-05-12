@@ -71,15 +71,26 @@ export default function GradingPage() {
           <p className="text-muted-foreground">Choose assignment to grade:</p>
           <div className="h-8" />
           {assignmentsData.map((assignmentItem) => (
-            <AssignmentGradingCard
+            <div
               key={assignmentItem.id}
-              id={assignmentItem.id}
-              name={assignmentItem.name}
-              dueDate={assignmentItem.dueDate}
-              deliveryStatus={assignmentItem.deliveryStatus}
-              gradingStatus={assignmentItem.gradingStatus}
+              role="button"
+              tabIndex={0}
               onClick={handleCreateAssignment}
-            />
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  handleCreateAssignment()
+                }
+              }}
+            >
+              <AssignmentGradingCard
+                id={assignmentItem.id}
+                name={assignmentItem.name}
+                dueDate={assignmentItem.dueDate}
+                deliveryStatus={assignmentItem.deliveryStatus}
+                gradingStatus={assignmentItem.gradingStatus}
+                onClick={handleCreateAssignment}
+              />
+            </div>
           ))}
         </>
       ) : (

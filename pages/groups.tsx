@@ -67,10 +67,18 @@ export default function GroupsPage() {
         <>
           <p className="text-muted-foreground">You don’t have any groups yet.</p>
           <div className="h-4" />
-          <Button onClick={handleCreateClick} className="bg-[#1F2937] text-white">
+          <Button
+            onClick={handleCreateClick}
+            className="bg-[#1F2937] text-white"
+            aria-label="Create Group"
+          >
             Create Group
           </Button>
-          <Button onClick={handleCreateClick} className="bg-primary text-white">
+          <Button
+            onClick={handleCreateClick}
+            className="bg-primary text-white"
+            aria-label="Create groups"
+          >
             Create groups
           </Button>
         </>
@@ -89,15 +97,16 @@ export default function GroupsPage() {
                     How many groups do you want?
                   </label>
                   <Input
-  id="group-number"
-  type="number"
-  min={1}
-  max={30}
-  value={groupNumber}
-  placeholder="Enter number"
-  onChange={(e) => setGroupNumber(e.target.value)}
-  className="w-40 placeholder:text-muted-foreground"
-/>
+                    id="group-number"
+                    type="number"
+                    min={1}
+                    max={30}
+                    value={groupNumber}
+                    placeholder="Enter number"
+                    onChange={(e) => setGroupNumber(e.target.value)}
+                    className="w-40 placeholder:text-muted-foreground"
+                    aria-label="Number of groups"
+                  />
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -105,7 +114,7 @@ export default function GroupsPage() {
                     How would you like to divide your students?
                   </p>
                   <Select value={divisionMethod} onValueChange={setDivisionMethod}>
-                    <SelectTrigger className="w-64">
+                    <SelectTrigger className="w-64" aria-label="Division method">
                       <SelectValue
                         placeholder="Select division method"
                         className="text-muted-foreground font-normal"
@@ -137,11 +146,19 @@ export default function GroupsPage() {
                     Drag and drop students to assign them to different groups.
                   </p>
                   <div className="flex gap-2">
-                    <Button variant="outline" onClick={handleAddGroup}>
+                    <Button
+                      variant="outline"
+                      onClick={handleAddGroup}
+                      aria-label="Add group"
+                    >
                       <Plus className="w-4 h-4 mr-2" />
                       Add Group
                     </Button>
-                    <Button variant="outline" onClick={handleShuffleStudents}>
+                    <Button
+                      variant="outline"
+                      onClick={handleShuffleStudents}
+                      aria-label="Shuffle students"
+                    >
                       <Shuffle className="w-4 h-4 mr-2" />
                       Shuffle
                     </Button>
@@ -151,27 +168,27 @@ export default function GroupsPage() {
               </>
             )}
 
-{currentStep === 2 && (
-  <div className="mt-4 mb-2">
-    <div className="border rounded-xl p-6 w-full max-w-md shadow-sm">
-      <p className="text-base font-semibold mb-4">Overview</p>
-      <div className="flex flex-col space-y-3">
-        <div className="flex justify-between">
-          <span className="text-sm text-muted-foreground">Amount of students</span>
-          <span className="text-sm font-medium">30</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-sm text-muted-foreground">Amount of groups</span>
-          <span className="text-sm font-medium">6</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-sm text-muted-foreground">Students per group</span>
-          <span className="text-sm font-medium">5</span>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+            {currentStep === 2 && (
+              <div className="mt-4 mb-2">
+                <div className="border rounded-xl p-6 w-full max-w-md shadow-sm">
+                  <p className="text-base font-semibold mb-4">Overview</p>
+                  <div className="flex flex-col space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-muted-foreground">Amount of students</span>
+                      <span className="text-sm font-medium">30</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-muted-foreground">Amount of groups</span>
+                      <span className="text-sm font-medium">6</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-muted-foreground">Students per group</span>
+                      <span className="text-sm font-medium">5</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="mt-8 flex justify-between">
