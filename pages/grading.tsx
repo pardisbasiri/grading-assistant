@@ -22,7 +22,7 @@ const assignmentsData: Assignment[] = [
     id: "assign-1",
     name: "Finding user needs",
     dueDate: "20 May",
-    deliveryStatus: "Group 5",
+    deliveryStatus: "Delivered by all 6 groups",
     gradingStatus: "Not graded yet",
   },
 ]
