@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { cn } from "@/lib/utils";
 import { ChevronRight } from 'lucide-react';
 import {
@@ -27,21 +27,43 @@ export function AssignmentGradingCard({
   onClick,
   className
 }: AssignmentGradingCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
     onClick(id);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick();
+    }
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const previous = cardRef.current?.previousElementSibling as HTMLElement;
+      previous?.focus();
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const next = cardRef.current?.nextElementSibling as HTMLElement;
+      next?.focus();
+    }
+  };
+
   return (
     <Card
+      ref={cardRef}
       className={cn(
-        "w-full cursor-pointer hover:ring-2 ring-primary hover:bg-muted transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        "w-full cursor-pointer hover:ring-2 ring-primary hover:bg-muted transition focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
         className
       )}
       onClick={handleClick}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleClick(); }}
+      onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
+      aria-label={`Open assignment ${name}`}
     >
       <CardHeader className="pb-2 pt-4 px-4">
         <CardTitle className="text-lg">{name}</CardTitle>

@@ -10,9 +10,19 @@ export type Student = {
 
 interface Props {
   student: Student;
+  index: number;
+  total: number;
+  onMoveLeft: (student: Student) => void;
+  onMoveRight: (student: Student) => void;
 }
 
-export default function DraggableStudentCard({ student }: Props) {
+export default function DraggableStudentCard({
+  student,
+  index,
+  total,
+  onMoveLeft,
+  onMoveRight
+}: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -29,11 +39,41 @@ export default function DraggableStudentCard({ student }: Props) {
     }
   }, [ref, drag]);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'ArrowLeft') {
+      onMoveLeft(student);
+      e.preventDefault();
+    }
+    if (e.key === 'ArrowRight') {
+      onMoveRight(student);
+      e.preventDefault();
+    }
+    if (e.key === 'ArrowUp' && index > 0) {
+      const prev = document.querySelector<HTMLDivElement>(
+        `[data-student-index='${index - 1}']`
+      );
+      prev?.focus();
+      e.preventDefault();
+    }
+    if (e.key === 'ArrowDown' && index < total - 1) {
+      const next = document.querySelector<HTMLDivElement>(
+        `[data-student-index='${index + 1}']`
+      );
+      next?.focus();
+      e.preventDefault();
+    }
+  };
+
   return (
     <div
       ref={ref}
-      className="bg-white border border-muted rounded-xl px-4 py-3 mb-2 shadow-sm flex justify-between items-center hover:ring-2 ring-primary hover:bg-muted/80 transition"
+      role="button"
+      tabIndex={0}
+      data-student-index={index}
+      onKeyDown={handleKeyDown}
+      className="bg-white border border-muted rounded-xl px-4 py-3 mb-2 shadow-sm flex justify-between items-center hover:ring-2 ring-primary hover:bg-muted/80 transition focus:outline-none focus:ring-2 focus:ring-primary"
       style={{ opacity: isDragging ? 0.5 : 1 }}
+      aria-label={`Student ${student.name}, ${student.major}`}
     >
       <div className="flex items-center gap-3">
         <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
@@ -45,7 +85,7 @@ export default function DraggableStudentCard({ student }: Props) {
         </div>
       </div>
 
-      {/* Drag Handle */}
+      {/* Drag Handle (dots) */}
       <div className="grid grid-cols-2 gap-x-1 gap-y-1 pr-1">
         {Array.from({ length: 6 }).map((_, i) => (
           <div

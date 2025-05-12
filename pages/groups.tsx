@@ -1,63 +1,63 @@
-import React, { useState } from "react"
-import StepProgress from "../components/StepProgress"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import React, { useState } from "react";
+import StepProgress from "../components/StepProgress";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import NavigationButton from "../components/NavigationButton"
-import StudentGroupManager from "../components/StudentGrouping/StudentGroupManager"
-import { Shuffle, Plus } from "lucide-react"
-import FinishButtonWithDialog from "../components/FinishButtonWithDialog"
-import { showCustomToast } from "../components/CustomToast"
+} from "@/components/ui/select";
+import NavigationButton from "../components/NavigationButton";
+import StudentGroupManager from "../components/StudentGrouping/StudentGroupManager";
+import { Shuffle, Plus } from "lucide-react";
+import FinishButtonWithDialog from "../components/FinishButtonWithDialog";
+import { showCustomToast } from "../components/CustomToast";
 
 export default function GroupsPage() {
-  const [creatingGroups, setCreatingGroups] = useState(false)
-  const [currentStep, setCurrentStep] = useState(0)
-  const [groupNumber, setGroupNumber] = useState("")
-  const [divisionMethod, setDivisionMethod] = useState("")
+  const [creatingGroups, setCreatingGroups] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [groupNumber, setGroupNumber] = useState("");
+  const [divisionMethod, setDivisionMethod] = useState("");
 
-  const steps = ["1. Group Division", "2. Student Selection", "3. Overview"]
+  const steps = ["1. Group Division", "2. Student Selection", "3. Overview"];
 
   const handleCreateClick = () => {
-    setCreatingGroups(true)
-    setCurrentStep(0)
-  }
+    setCreatingGroups(true);
+    setCurrentStep(0);
+  };
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1)
+      setCurrentStep(currentStep + 1);
     }
-  }
+  };
 
   const handleBack = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1)
+      setCurrentStep(currentStep - 1);
     } else {
-      setCreatingGroups(false)
+      setCreatingGroups(false);
     }
-  }
+  };
 
   const handleAddGroup = () => {
-    window.dispatchEvent(new CustomEvent("add-group"))
-  }
+    window.dispatchEvent(new CustomEvent("add-group"));
+  };
 
   const handleShuffleStudents = () => {
-    window.dispatchEvent(new CustomEvent("shuffle-students"))
-  }
+    window.dispatchEvent(new CustomEvent("shuffle-students"));
+  };
 
   const handlePublish = () => {
-    console.log("Groups published")
-    showCustomToast("Groups Published", handleUndo)
-  }
+    console.log("Groups published");
+    showCustomToast("Groups Published", handleUndo);
+  };
 
   const handleUndo = () => {
-    console.log("Undo group publish")
-  }
+    console.log("Undo group publish");
+  };
 
   return (
     <div className="p-6 z-0">
@@ -65,7 +65,9 @@ export default function GroupsPage() {
 
       {!creatingGroups ? (
         <>
-          <p className="text-muted-foreground">You don’t have any groups yet.</p>
+          <p className="text-muted-foreground">
+            You don’t have any groups yet.
+          </p>
           <div className="h-4" />
           <Button
             onClick={handleCreateClick}
@@ -87,13 +89,16 @@ export default function GroupsPage() {
           <StepProgress steps={steps} currentStep={currentStep} />
           <div className="mt-6">
             {currentStep === 0 && (
-              <div className="flex flex-col gap-6 mb-12">
+              <div className="flex flex-col gap-6 mb-12" tabIndex={0}>
                 <p className="text-muted-foreground">
                   Choose how to divide the 30 students into groups
                 </p>
 
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="group-number" className="text-sm font-semibold">
+                <div className="flex flex-col gap-2" tabIndex={0}>
+                  <label
+                    htmlFor="group-number"
+                    className="text-sm font-semibold"
+                  >
                     How many groups do you want?
                   </label>
                   <Input
@@ -109,12 +114,18 @@ export default function GroupsPage() {
                   />
                 </div>
 
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2" tabIndex={0}>
                   <p className="text-sm font-semibold">
                     How would you like to divide your students?
                   </p>
-                  <Select value={divisionMethod} onValueChange={setDivisionMethod}>
-                    <SelectTrigger className="w-64" aria-label="Division method">
+                  <Select
+                    value={divisionMethod}
+                    onValueChange={setDivisionMethod}
+                  >
+                    <SelectTrigger
+                      className="w-64"
+                      aria-label="Division method"
+                    >
                       <SelectValue
                         placeholder="Select division method"
                         className="text-muted-foreground font-normal"
@@ -174,15 +185,21 @@ export default function GroupsPage() {
                   <p className="text-base font-semibold mb-4">Overview</p>
                   <div className="flex flex-col space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Amount of students</span>
+                      <span className="text-sm text-muted-foreground">
+                        Amount of students
+                      </span>
                       <span className="text-sm font-medium">30</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Amount of groups</span>
+                      <span className="text-sm text-muted-foreground">
+                        Amount of groups
+                      </span>
                       <span className="text-sm font-medium">6</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Students per group</span>
+                      <span className="text-sm text-muted-foreground">
+                        Students per group
+                      </span>
                       <span className="text-sm font-medium">5</span>
                     </div>
                   </div>
@@ -216,5 +233,5 @@ export default function GroupsPage() {
         </>
       )}
     </div>
-  )
+  );
 }
